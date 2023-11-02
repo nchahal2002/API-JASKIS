@@ -89,14 +89,20 @@ db.bounties.find({"location": "Grasslands"})
 db.bounties.find({"reward": {$gte: 10000}})
 
 // 3. Query for all bounties, but exclude the client attribute from being shown
+db.bounties.find({}, {"client": 0})
 
 // 4. Query for a Groundhog in the Woodlands
+db.bounties.find({"species": "Groundhog"}, {"location": "Woodlands"})
 
 // Update and Delete
 // 1. Update the reward for Polarwind to 10000
+db.bounties.update({"name": "Polarwind"}, {$set: {"reward": 10000}})
 
 // 2. Remove Lokinkajou
+db.bounties.deleteOne({"name": "Lokinkajou"})
 
 // 3. Delete all bounties sent by Songbird
+db.bounties.deleteMany({"client": "Songbird"})
 
 // 4. Update all captured statuses to true
+db.bounties.updateMany({}, {$set: {"status": true}})
